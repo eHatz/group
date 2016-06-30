@@ -8,9 +8,24 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	center: timLatLng //centers map on these coordinates
 });
 
+var smile = { //new marker image to be used
+    url: "assets/images/smile.png", // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(15, 15) // anchor
+};
+
+var bigSmile = { //new marker image to be used
+    url: "assets/images/bigSmile.png", // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(15, 15) // anchor
+};
+
 var timMarker = new google.maps.Marker({ // new marker
 	position: timLatLng, //coordinates inside timLatLng
 	map: map,
+	icon: bigSmile, // sets marker to a new image stored inside bigSmile
 	title: 'hi'
 });
 
@@ -36,7 +51,6 @@ google.maps.event.addListener(timMarker,'click',function(e){ //when a specific m
 google.maps.event.addListener(autocomplete, 'place_changed', function() {
 	infoWindow1.close();
 	var place = autocomplete.getPlace(); //give the variable place the value that was autocompleted in the search bar
-
 	if (place.geometry.viewport) { //probably recenter map on searched location
 		map.fitBounds(place.geometry.viewport);
 		map.setZoom(20);
@@ -63,7 +77,8 @@ google.maps.event.addListener(map, 'click', function(event) { //listens for clic
 function placeMarker(location) { // places a marker where the user clicked
     marker = new google.maps.Marker({
         position: location,
-        map: map
+        map: map,
+        icon: smile
     });
     latitude = marker.getPosition().lat(); // sets the value in latitude to the latitude of the current marker
     longitude = marker.getPosition().lng(); // sets the value in longitude to the latitude of the current marker
