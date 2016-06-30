@@ -1,6 +1,19 @@
 var form = document.getElementById('file-form');
 var fileSelect = document.getElementById('file-select');
 var uploadButton = document.getElementById('upload-button');
+var testImage = '<img src="assets/images/smile.png">'
+// Initialize Firebase
+
+var config = {
+	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
+	authDomain: "group-e135d.firebaseapp.com",
+	databaseURL: "https://group-e135d.firebaseio.com",
+	storageBucket: "",
+};
+firebase.initializeApp(config);
+var dbRef = firebase.database().ref();
+dbRef.set({testImage});
+
 
 form.onsubmit = function(event) {
 	event.preventDefault();
@@ -37,4 +50,10 @@ for (var i = 0; i < files.length; i++) {
 // formData.append(name, blob, filename);
 
 // // Strings
-// formData.append(name, value);    
+// formData.append(name, value);
+dbRef.on('value', function(snapshot) {
+	$('#googleMaps').append(snapshot.val().testImage);
+	console.log(snapshot.val().testImage);
+}, function(error) {
+	console.error(error);
+});
