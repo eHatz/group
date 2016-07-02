@@ -1,77 +1,110 @@
-// var form = document.getElementById('file-form');
-// var fileSelect = document.getElementById('file-select');
-// var uploadButton = document.getElementById('upload-button');
-// var testImage = '<img src="assets/images/smile.png">'
-// // Initialize Firebase
+var username;
+var password;
+var src = '';
+var allUsers;
+var allImages;
 
-// var config = {
-// 	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
-// 	authDomain: "group-e135d.firebaseapp.com",
-// 	databaseURL: "https://group-e135d.firebaseio.com",
-// 	storageBucket: "",
-// };
-// firebase.initializeApp(config);
-// var dbRef = firebase.database().ref();
-// dbRef.set({testImage});
+var config = {
+	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
+	authDomain: "group-e135d.firebaseapp.com",
+	databaseURL: "https://group-e135d.firebaseio.com",
+	storageBucket: "",
+};
 
-
-// form.onsubmit = function(event) {
-// 	event.preventDefault();
-
-// 	// Update button text.
-// 	uploadButton.innerHTML = 'Uploading...';
-
-// 	// The rest of the code will go here...
-// };
-
-// // Get the selected files from the input.
-// var files = fileSelect.files;
-
-// // Create a new FormData object.
-// var formData = new FormData();
-
-// // Loop through each of the selected files.
+firebase.initializeApp(config);
+var dbRef = firebase.database().ref();
 
 
-// // // Files
-// // formData.append(name, file, filename);
+dbRef.child('src').set({src});
 
-// // // Blobs
-// // formData.append(name, blob, filename);
 
-// // // Strings
-// // formData.append(name, value);
-// dbRef.on('value', function(snapshot) {
-// 	$('#googleMaps').append(snapshot.val().testImage);
-// 	console.log(snapshot.val().testImage);
-// }, function(error) {
-// 	console.error(error);
-// });
+//GETS IMAGE FROM LOCAL FILES
+document.getElementById('imgLoader').onchange = function handleImage(e) {// gives the img data as a base64 encoded string.
+	var reader = new FileReader();
+	reader.onload = function (event) {
+		src = event.target.result;
+		dbRef.child('src').set({src});
+	}
+	reader.readAsDataURL(e.target.files[0]);
+};
 
-document.getElementById('imgLoader').onchange = function handleImage(e) {
-    var reader = new FileReader();
-    reader.onload = function (event) { console.log('fdsf');
-        var imgObj = new Image();
-        imgObj.src = event.target.result;
-        imgObj.onload = function () {
-            // start fabricJS stuff
-            
+// USER SIGNUP FORM
+$('#formSubmit').on('click', function() { // form for username and password
+	username = $('#usernameField').val(); // value inside username field
+	password = $('#passwordField').val(); // value inside password field
 
-        $('#googleMaps').append(imgObj);
-            var image = new fabric.Image(imgObj);
-            image.set({
-                left: 250,
-                top: 250,
-                angle: 20,
-                padding: 10,
-                cornersize: 10
-            });
-            //image.scale(getRandomNum(0.1, 0.25)).setCoords();
-            canvas.add(image);
-            
-            // end fabricJS stuff
-        }
-        
-    }
-    reader.readAsDataURL(e.target.files[0]);
-}
+	var dbUser = {
+		username: username,
+		password: password
+	};
+	var usernameCheck = false;
+	for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
+		if (allUsers[i].username === username) { //if the username already exists change that value to true
+			usernameCheck = true;
+		}
+	}
+	if (usernameCheck === false) { // if there where no users already in that database with that name
+		dbRef.child('currentUser').set(dbUser); //changes value of current user on firebase to the object dbUser
+		allUsers.push(dbUser); // pushes the user object into the array
+		dbRef.child('users').set(allUsers); // sends the value of the new array to firebase
+	} else {
+		alert('Username already exists.'); // if the user does exist show this message
+	}
+	return false;
+});
+
+dbRef.on('value', function(snapshot) {
+	allUsers = snapshot.val().users;
+	allImages = snapshot.val().images;
+		var imageSrc = snapshot.val().src.src; //gets the img data as a base64 encoded string stored on server
+		var image = $('<img>', {
+			src: imageSrc
+		});
+	
+
+	for (var i = 1; i < allImages.length; i++) {
+			
+		var newMarker = new google.maps.Marker({ // new marker
+			position: allImages[i].position, //coordinates inside timLatLng
+			map: map,
+			icon: bigSmile, // sets marker to a new image stored inside bigSmile
+			title: 'hi',
+			attr: i
+		});
+
+		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
+			var infoWindowOptions = { //contents of info window
+				content:'<img border="0" id="img-size" src="'+allImages[this.attr].source+'">'
+			};
+			var infoWindow1 = new google.maps.InfoWindow(infoWindowOptions);
+			infoWindow1.open(map, this);
+		});
+	};
+
+
+
+}, function(error) {
+	console.error(error);
+});
+
+
+//SUBMIT BUTTON FOR IMAGES
+
+$('#imageBtn').on('click', function () {
+	if (src && latitude) { //if there is a value in the source/ if there is an image already selected
+		var imageObj = {
+			username: username,
+			source: src,
+			position: {lat: latitude, lng: longitude}
+		};
+		allImages.push(imageObj);
+		dbRef.child('images').set(allImages);
+	} else if (!src && !latitude){
+		alert('Please select an image and a location on the map.')
+	} else if (src && !latitude){
+		alert('Please select a location on the map.')
+	} else if (!src && latitude){
+		alert('Please select an image.')
+	};
+
+});
