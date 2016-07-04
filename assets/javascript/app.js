@@ -29,30 +29,52 @@ document.getElementById('imgLoader').onchange = function handleImage(e) {// give
 };
 
 // USER SIGNUP FORM
-$('#formSubmit').on('click', function() { // form for username and password
+function signup () {
+
+	$('#formSubmit').on('click', function() { // form for username and password
+		username = $('#usernameField').val(); // value inside username field
+		password = $('#passwordField').val(); // value inside password field
+
+		var dbUser = {
+			username: username,
+			password: password
+		};
+		var usernameCheck = false;
+		for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
+			if (allUsers[i].username === username) { //if the username already exists change that value to true
+				usernameCheck = true;
+			}
+		}
+		if (usernameCheck === false) { // if there where no users already in that database with that name
+			dbRef.child('currentUser').set(dbUser); //changes value of current user on firebase to the object dbUser
+			allUsers.push(dbUser); // pushes the user object into the array
+			dbRef.child('users').set(allUsers); // sends the value of the new array to firebase
+		} else {
+			alert('Username already exists.'); // if the user does exist show this message
+		}
+		return false;
+	});
+};
+
+function signIn () {
 	username = $('#usernameField').val(); // value inside username field
 	password = $('#passwordField').val(); // value inside password field
-
 	var dbUser = {
 		username: username,
 		password: password
 	};
 	var usernameCheck = false;
 	for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
-		if (allUsers[i].username === username) { //if the username already exists change that value to true
+		if (allUsers[i].username === username && allUsers[i].password === password) { //if the username already exists change that value to true
 			usernameCheck = true;
-		}
+		};
+		if (usernameCheck === false) { // if there where no users already in that database with that name
+			$('#messageDiv').text('Invalid Username or Password.')
+		} else {
+			
+		};
 	}
-	if (usernameCheck === false) { // if there where no users already in that database with that name
-		dbRef.child('currentUser').set(dbUser); //changes value of current user on firebase to the object dbUser
-		allUsers.push(dbUser); // pushes the user object into the array
-		dbRef.child('users').set(allUsers); // sends the value of the new array to firebase
-	} else {
-		alert('Username already exists.'); // if the user does exist show this message
-	}
-	return false;
-});
-
+};
 dbRef.on('value', function(snapshot) {
 	allUsers = snapshot.val().users;
 	allImages = snapshot.val().images;
@@ -63,11 +85,18 @@ dbRef.on('value', function(snapshot) {
 	
 
 	for (var i = 1; i < allImages.length; i++) {
-			
+		
+		var marker = { //new marker image to be used
+		    url: allImages[i].markerSrc, // url
+		    scaledSize: new google.maps.Size(30, 30), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(15, 15) // anchor
+		};
+
 		var newMarker = new google.maps.Marker({ // new marker
 			position: allImages[i].position, //coordinates inside timLatLng
 			map: map,
-			icon: bigSmile, // sets marker to a new image stored inside bigSmile
+			icon: marker, // sets marker to a new image stored inside bigSmile
 			title: 'hi',
 			attr: i
 		});
@@ -95,6 +124,7 @@ $('#imageBtn').on('click', function () {
 		var imageObj = {
 			username: username,
 			source: src,
+			markerSrc: mapIcon,
 			position: {lat: latitude, lng: longitude}
 		};
 		allImages.push(imageObj);
