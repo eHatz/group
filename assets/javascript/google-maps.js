@@ -8,6 +8,14 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	center: timLatLng //centers map on these coordinates
 });
 
+var mapIcon;
+
+$('.icon').on('click', function(){
+	mapIcon = this.src;
+});
+
+
+
 var smile = { //new marker image to be used
     url: "assets/images/smile.png", // url
     scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -78,7 +86,12 @@ function placeMarker(location) { // places a marker where the user clicked
     marker = new google.maps.Marker({
         position: location,
         map: map,
-        icon: smile
+        icon: {
+	        url: mapIcon,
+	        scaledSize: new google.maps.Size(30, 30), // scaled size
+	    	origin: new google.maps.Point(0,0), // origin
+	    	anchor: new google.maps.Point(15, 15) // anchor 
+    	}
     });
     latitude = marker.getPosition().lat(); // sets the value in latitude to the latitude of the current marker
     longitude = marker.getPosition().lng(); // sets the value in longitude to the latitude of the current marker
