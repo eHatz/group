@@ -63,11 +63,18 @@ dbRef.on('value', function(snapshot) {
 	
 
 	for (var i = 1; i < allImages.length; i++) {
-			
+		
+		var marker = { //new marker image to be used
+		    url: allImages[i].markerSrc, // url
+		    scaledSize: new google.maps.Size(30, 30), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(15, 15) // anchor
+		};
+
 		var newMarker = new google.maps.Marker({ // new marker
 			position: allImages[i].position, //coordinates inside timLatLng
 			map: map,
-			icon: bigSmile, // sets marker to a new image stored inside bigSmile
+			icon: marker, // sets marker to a new image stored inside bigSmile
 			title: 'hi',
 			attr: i
 		});
@@ -95,6 +102,7 @@ $('#imageBtn').on('click', function () {
 		var imageObj = {
 			username: username,
 			source: src,
+			markerSrc: mapIcon,
 			position: {lat: latitude, lng: longitude}
 		};
 		allImages.push(imageObj);
