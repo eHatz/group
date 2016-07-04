@@ -15,7 +15,6 @@ $('.icon').on('click', function(){
 });
 
 
-
 var smile = { //new marker image to be used
     url: "assets/images/smile.png", // url
     scaledSize: new google.maps.Size(30, 30), // scaled size
