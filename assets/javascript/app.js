@@ -29,7 +29,7 @@ document.getElementById('imgLoader').onchange = function handleImage(e) {// give
 };
 
 // USER SIGNUP FORM
-function signup () {
+// function signup () {
 
 	$('#formSubmit').on('click', function() { // form for username and password
 		username = $('#usernameField').val(); // value inside username field
@@ -54,27 +54,29 @@ function signup () {
 		}
 		return false;
 	});
-};
+// };
 
-function signIn () {
-	username = $('#usernameField').val(); // value inside username field
-	password = $('#passwordField').val(); // value inside password field
-	var dbUser = {
-		username: username,
-		password: password
-	};
-	var usernameCheck = false;
-	for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
-		if (allUsers[i].username === username && allUsers[i].password === password) { //if the username already exists change that value to true
-			usernameCheck = true;
+// function signIn () {
+	$('#formSubmit').on('click', function() { 
+		username = $('#usernameField').val(); // value inside username field
+		password = $('#passwordField').val(); // value inside password field
+		var dbUser = {
+			username: username,
+			password: password
 		};
-		if (usernameCheck === false) { // if there where no users already in that database with that name
-			$('#messageDiv').text('Invalid Username or Password.')
-		} else {
-			
-		};
-	}
-};
+		var usernameCheck = false;
+		for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
+			if (allUsers[i].username === username && allUsers[i].password === password) { //if the username already exists change that value to true
+				usernameCheck = true;
+			};
+			if (usernameCheck === false) { // if there where no users already in that database with that name
+				$('#messageDiv').text('Invalid Username or Password.')
+			} else {
+				
+			};
+		}
+	});
+// };
 dbRef.on('value', function(snapshot) {
 	allUsers = snapshot.val().users;
 	allImages = snapshot.val().images;
