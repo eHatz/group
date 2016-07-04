@@ -1,19 +1,14 @@
-
 var latitude;
 var longitude;
-
-
 var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 10,
 	center: {lat: 40.4259120, lng: -74.3922090}//centers map on these coordinates
 });
+var mapIcon = "assets/images/waldo.png";
 
-var smile = { //new marker image to be used
-    url: "assets/images/smile.png", // url
-    scaledSize: new google.maps.Size(30, 30), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(15, 15) // anchor
-};
+$('.icon').on('click', function(){
+	mapIcon = this.src;
+});
 
 
 
@@ -59,7 +54,12 @@ function placeMarker(location) { // places a marker where the user clicked
     marker = new google.maps.Marker({
         position: location,
         map: map,
-        icon: smile
+        icon: {
+	        url: mapIcon,
+	        scaledSize: new google.maps.Size(30, 30), // scaled size
+	    	origin: new google.maps.Point(0,0), // origin
+	    	anchor: new google.maps.Point(15, 15) // anchor 
+    	}
     });
     latitude = marker.getPosition().lat(); // sets the value in latitude to the latitude of the current marker
     longitude = marker.getPosition().lng(); // sets the value in longitude to the latitude of the current marker
