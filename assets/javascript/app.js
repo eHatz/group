@@ -108,3 +108,14 @@ $('#imageBtn').on('click', function () {
 	};
 
 });
+
+
+// OWL CAROUSEL
+$(document).ready(function() {
+ 	$("#owl-demo").owlCarousel({
+		autoPlay: false, //Set AutoPlay to x000 seconds
+		items : 4, //Number of items visable at a time
+		itemsDesktop : [1199,3],
+		itemsDesktopSmall : [979,3]
+	});
+});
