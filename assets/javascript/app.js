@@ -28,7 +28,7 @@ document.getElementById('imgLoader').onchange = function handleImage(e) {// give
 	reader.readAsDataURL(e.target.files[0]);
 };
 
-// USER SIGNUP FORM $ styling, login, sign up, if user exists get index... tech icons... time api
+// USER SIGNUP FORM
 $('#formSubmit').on('click', function() { // form for username and password
 	username = $('#usernameField').val(); // value inside username field
 	password = $('#passwordField').val(); // value inside password field
