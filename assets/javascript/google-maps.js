@@ -7,7 +7,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 var mapIcon = "assets/images/waldo.png";
 
 $('.icon').on('click', function(){
-	mapIcon = this.src;
+	mapIcon = 'assets/images/' + this.id;
 });
 
 
