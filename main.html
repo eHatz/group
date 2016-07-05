@@ -6,21 +6,31 @@
     <meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	 <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
 	<!-- Important Owl stylesheet -->
 	<link rel="stylesheet" href="assets/css/owl.carousel.css"> 
 	<!-- Default Theme -->
 	<link rel="stylesheet" href="assets/css/owl.theme.css">
 
-	<title>MEME</title>
+	<title>SocietyPin</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
+
+<br>
+	<div class="container">
+				<div class="jumbotron">
+					<h1 class="text-center">Society Pin</h1>
+				</div>
+		</div>
 	<div class="container">
 
 	<div class="row">
 		<div class="col-md-12">
 			<h1 id="header">Log In</h1>
 			<form id="logInForm">
+				<div id="logInMessageDiv"></div>
+				<br>
 				<div class="form-group">
 					<label for="exampleInputEmail1">User Name</label>
 					<input type="text" class="form-control" id="usernameField" placeholder="XXXSniperXXX">
@@ -29,65 +39,61 @@
 					<label for="exampleInputPassword1">Password</label>
 					<input type="password" class="form-control" id="passwordField" placeholder="Password">
 				</div>
-				<button type="submit" class="btn btn-default" id="logInBtn">Log In</button>
-				<button type="button" class="btn btn-default" id="signUpPageBtn" onclick=location.href="signUp.html">Sign Up</button>
+				<button type="submit" class="btn btn-warning" id="logInBtn">Log In</button>
+				<button type="button" class="btn btn-warning" id="signUpPageBtn" onclick=location.href="signUp.html">Sign Up</button>
 			</form>
-
+		<br>
 			<div id="logInMessageDiv">
 			</div>
 		</div>
 	</div>
 
-		<div class="row">
-            <div class="col-md-12">
-                <a href="#" id="get_location">Get location</a>
-            </div>
+	<div class="row">
+        <div class="col-md-12">
+            <a href="#" id="get_location">Get location</a>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <input type="text" class="form-control" id="autocomplete" placeholder="Search a location">
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="text" class="form-control" id="autocomplete" placeholder="Search a location">
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div id="map"></div>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map"></div>
         </div>
-
-		<div class="row">
-			<div class="col-md-6">
-				<div id="scroll">
-					<div id="owl-demo">
-						<div class="item"><img class="icon" id= 'lost-pet.png' src="assets/images/lost-pet.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'fire.png' src="assets/images/fire.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'construction.png' src="assets/images/construction.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'parking.png' src="assets/images/parking.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'events.png' src="assets/images/events.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'power-outage.png' src="assets/images/power-outage.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'police.png' src="assets/images/police.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'pothole.png' src="assets/images/pothole.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'power-outage.png' src="assets/images/power-outage.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'sale.png' src="assets/images/sale.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'biohazard.png' src="assets/images/biohazard.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'road-closed.png' src="assets/images/road-closed.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'traffic-cone.png' src="assets/images/traffic-cone.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'warning.png' src="assets/images/warning.png" alt="Map Icon"></div>
-						<div class="item"><img class="icon" id= 'waldo.png' src="assets/images/waldo.png" alt="Map Icon"></div>
-					</div>
+    </div>
+        
+	<div class="row">
+		<div class="col-md-4">
+			<div id="scroll">
+				<div id="owl-demo">
+					<div class="item"><img class="icon" id= 'lost-pet.png' src="assets/images/lost-pet.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'fire.png' src="assets/images/fire.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'construction.png' src="assets/images/construction.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'parking.png' src="assets/images/parking.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'events.png' src="assets/images/events.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'power-outage.png' src="assets/images/power-outage.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'police.png' src="assets/images/police.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'pothole.png' src="assets/images/pothole.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'sale.png' src="assets/images/sale.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'biohazard.png' src="assets/images/biohazard.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'road-closed.png' src="assets/images/road-closed.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'traffic-cone.png' src="assets/images/traffic-cone.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'warning.png' src="assets/images/warning.png" alt="Map Icon"></div>
+					<div class="item"><img class="icon" id= 'waldo.png' src="assets/images/waldo.png" alt="Map Icon"></div>
 				</div>
-			</div>	
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-2" id="imgUploader">
-			</div>
-
-			<div class="col-md-2" id="imgUploaderBtn">
-			</div>
-			<div class="col-md-1">
 			</div>
 		</div>
+
+		<div class="col-md-2" id="imgUploader"></div>
+
+		<div class="col-md-4" id="msgUploader"></div>
+
+		<div class="col-md-2" id="imgUploaderBtn"></div>
+	</div>
 
 
 	</div>

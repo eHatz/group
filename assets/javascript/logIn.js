@@ -4,6 +4,7 @@ function addButtons() {
 	$('#logInMessageDiv').remove();
 	$('#imgUploaderBtn').append('<button type="button" class="btn btn-default" id="imageBtn">Images</button>');
 	$('#imgUploader').append('<input type="file" id="imgLoader">');
+	$('#msgUploader').append('<input type="text" class="form-control" id="message" placeholder="message">')
 	imgSelector();
 };
 
@@ -27,7 +28,7 @@ function signIn () {
 		}; 
 	};
 	if (usernameCheck === false) { // if there where no users already in that database with that name
-		$('#logInMessageDiv').text('Invalid Username or Password.');
+		$('#logInMessageDiv').html('Invalid Username or Password.');
 		};
 };
 
@@ -35,10 +36,3 @@ $('#logInBtn').on('click', function(){
 	signIn();
 	return false;
 });
-
-
-// dbRef.on('value', function(snapshot) {
-// 	allUsers = snapshot.val().users;
-// }, function(error) {
-// 	console.error(error);
-// });
