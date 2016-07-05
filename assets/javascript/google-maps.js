@@ -1,8 +1,8 @@
 var latitude;
 var longitude;
 var map = new google.maps.Map(document.getElementById('map'), {
-	zoom: 10,
-	center: {lat: 39.876019419621166, lng: -74.3922090}//centers map on these coordinates
+	zoom: 4,
+	center: {lat: 39.33429742980724, lng: -101.75537109375}//centers map on these coordinates
 });
 
 $('#get_location').on('click',function () {
@@ -38,21 +38,14 @@ google.maps.event.addListener(autocomplete, 'place_changed', function() {
 	if (place.geometry.viewport) { //probably recenter map on searched location
 		map.fitBounds(place.geometry.viewport);
 		console.log(place.geometry.location);
-		map.setZoom(20);
+		map.setZoom(15);
 
 	} else {
 		map.setCenter(place.geometry.location);
 		console.log(place.geometry.location);
-		map.setZoom(20);
+		map.setZoom(15);
 	}
 
-	//marker.setPosition(place.geometry.location); //sets the marker on the position that was searched for
-	//infoWindow.setContent('<div><strong>' + place.name + '</strong><br>'); //sets
-	// infoWindow.open(map, marker);
-
-	// google.maps.event.addListener(marker,'click',function(e){
-	// 	infoWindow.open(map, marker);
-	// });
 });
 
 google.maps.event.addListener(map, 'click', function(event) { //listens for clicks on the map

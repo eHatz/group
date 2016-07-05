@@ -3,6 +3,7 @@ var allUsers;
 var allImages;
 var imgIndex;
 var	imgUser;
+var imgVotes;
 
 var username;
 var password;
@@ -69,7 +70,8 @@ dbRef.on('value', function(snapshot) {
 			icon: marker, // sets marker to a new image stored inside bigSmile
 			title: 'New Marker',
 			attr: i,
-			username: allImages[i].username
+			username: allImages[i].username,
+			votes: allImages[i].votes
 		});
 		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
 			var infoWindow = new google.maps.InfoWindow({
@@ -77,12 +79,13 @@ dbRef.on('value', function(snapshot) {
 			});
 			imgIndex = this.attr;
 			imgUser = this.username;
+			imgVotes = this.votes;
 			console.log
 			var checkUser = checkUsername()
 
 			infoWindow.setContent('<p>'+allImages[this.attr].username+'</p>' +'<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br>' + 
 				'<p>'+allImages[this.attr].comment+'</p><br>' +
-                '<button onclick="upVote()">Up Vote</button>' + '<button onclick="downVote()">Down Vote</button>' + checkUser);
+                '<button onclick="upVote()">Up Vote '+ imgVotes.up +'</button>' + '<button onclick="downVote()">Down Vote '+ imgVotes.down +'</button>' + checkUser);
 			infoWindow.open(map, this);
 
 		});
@@ -96,10 +99,12 @@ function myFunction(){ //function for buttons inside infowindows
 	dbRef.child('images').set(allImages);
 };
 function upVote() {
-	console.log(imgIndex);
+	allImages[imgIndex].votes.up = allImages[imgIndex].votes.up +1;
+	dbRef.child('images').set(allImages);
 };
 function downVote() {
-	
+	allImages[imgIndex].votes.down = allImages[imgIndex].votes.down +1;
+	dbRef.child('images').set(allImages);
 };
 function checkUsername(){
 

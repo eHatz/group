@@ -1,14 +1,22 @@
-#messageDiv,
-#logInMessageDiv{
+#messageDiv, #logInMessageDiv{
 	color: red;
 	font-weight: bold;
 }
 
 #messageDiv2 {
 	color: green;
-	font-weight: bold;
+	font-weight: bolder;
 }
 
+#logInMessageDiv{
+	font-family: "Amatic SC", cursive;
+	font-size: 17px;
+	float: left;
+}
+#usernameField, #passwordField{
+	font-family: "Ariel";
+	color: black;
+}
 #map {
 	height: 500px;
 }
@@ -36,5 +44,42 @@ h1 {
 	text-align: center;
 	font-weight: bold;
 	padding-top: 5px;
-
 }
+.jumbotron{
+	background-image: url(https://media.giphy.com/media/Zl4qgmnvFPBeM/giphy.gif);
+	color: #ff9900;
+	font-family: "Amatic SC", cursive;
+	font-size: 600px;
+	height: 300px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+body{
+	background-color: black;
+}
+#header{
+	font-family: "Amatic SC", cursive;
+	color: #ff9900;
+}
+#logInForm{
+	font-family: "Amatic SC", cursive;
+	color: #ff9900;
+	margin-left: 300px;
+	margin-right: 300px;
+	font-size: 20px;
+	padding-bottom: 50px;
+	padding-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+#get_location{
+	font-family: "Amatic SC", cursive;
+	color: #ff9900;
+	font-size: 25px;
+}
+
+
+
+
+
+
