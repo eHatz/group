@@ -1,3 +1,14 @@
+#messageDiv,
+#logInMessageDiv{
+	color: red;
+	font-weight: bold;
+}
+
+#messageDiv2 {
+	color: green;
+	font-weight: bold;
+}
+
 #map {
 	height: 500px;
 }
