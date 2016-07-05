@@ -1,13 +1,16 @@
-// var src = '';
-// var allUsers;
-// var allImages;
+var src = '';
+var allUsers;
+var allImages;
 
-// var config = {
-// 	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
-// 	authDomain: "group-e135d.firebaseapp.com",
-// 	databaseURL: "https://group-e135d.firebaseio.com",
-// 	storageBucket: "",
-// };
+var username;
+var password;
+
+var config = {
+	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
+	authDomain: "group-e135d.firebaseapp.com",
+	databaseURL: "https://group-e135d.firebaseio.com",
+	storageBucket: "",
+};
 
 firebase.initializeApp(config);
 var dbRef = firebase.database().ref();
@@ -17,19 +20,32 @@ dbRef.child('src').set({src});
 
 
 //GETS IMAGE FROM LOCAL FILES
-document.getElementById('imgLoader').onchange = function handleImage(e) {// gives the img data as a base64 encoded string.
-	var reader = new FileReader();
-	reader.onload = function (event) {
-		src = event.target.result;
-		dbRef.child('src').set({src});
-	}
-	reader.readAsDataURL(e.target.files[0]);
+function imgSelector(){
+	document.getElementById('imgLoader').onchange = function handleImage(e) {// gives the img data as a base64 encoded string.
+		var reader = new FileReader();
+		reader.onload = function (event) {
+			src = event.target.result;
+			dbRef.child('src').set({src});
+		}
+		reader.readAsDataURL(e.target.files[0]);
+	};
 };
-
 
 dbRef.on('value', function(snapshot) {
 	allUsers = snapshot.val().users;
+	for (var i = 0; i < allUsers.length; i++) {
+		if (allUsers[i] === undefined) { // removes all undefined/missing users
+			allUsers.splice(i,1);
+			i--;
+		}
+	}
 	allImages = snapshot.val().images;
+	for (var i = 0; i < allImages.length; i++) {
+		if (allImages[i] === undefined) { // removes all undefined/missing entries
+			allImages.splice(i,1);
+			i--;
+		}
+	}
 		var imageSrc = snapshot.val().src.src; //gets the img data as a base64 encoded string stored on server
 		var image = $('<img>', {
 			src: imageSrc
@@ -67,8 +83,7 @@ dbRef.on('value', function(snapshot) {
 
 
 //SUBMIT BUTTON FOR IMAGES
-
-$('#imageBtn').on('click', function () {
+$('#imgUploaderBtn').on('click', '#imageBtn', function () {
 	if (src && latitude) { //if there is a value in the source/ if there is an image already selected
 		var imageObj = {
 			username: username,
