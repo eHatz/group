@@ -4,6 +4,7 @@ function addButtons() {
 	$('#logInMessageDiv').remove();
 	$('#imgUploaderBtn').append('<button type="button" class="btn btn-default" id="imageBtn">Images</button>');
 	$('#imgUploader').append('<input type="file" id="imgLoader">');
+	$('#msgUploader').append('<input type="text" class="form-control" id="message" placeholder="message">')
 	imgSelector();
 };
 

@@ -74,8 +74,9 @@ dbRef.on('value', function(snapshot) {
 				content: " "
 			});
 			imgIndex = this.attr;
-			infoWindow.setContent('<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br>' +
-                '<div onclick="myFunction()">Click me</div>');
+			infoWindow.setContent('<p>'+allImages[this.attr].username+'</p>' +'<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br>' + 
+				'<p>'+allImages[this.attr].comment+'</p><br>' +
+                '<button onclick="myFunction()">Click me</button>');
 			infoWindow.open(map, this);
 
 		});
@@ -85,8 +86,9 @@ dbRef.on('value', function(snapshot) {
 });
 
 function myFunction(){ //function for buttons inside infowindows
-	console.log(imgIndex);
-}
+	allImages.splice(imgIndex,1);
+	dbRef.child('images').set(allImages);
+};
 
 
 //SUBMIT BUTTON FOR IMAGES
@@ -98,8 +100,8 @@ $('#imgUploaderBtn').on('click', '#imageBtn', function () {
 			markerSrc: mapIcon,
 			position: {lat: latitude, lng: longitude},
 			time: ' ',
-			comment: ' '
-		};
+			comment: $('#message').val()
+			};
 		allImages.push(imageObj);
 		dbRef.child('images').set(allImages);
 	} else if (!src && !latitude){
