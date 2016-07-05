@@ -1,7 +1,6 @@
 var src = '';
 var allUsers;
 var allImages;
-var imgIndex;
 
 var username;
 var password;
@@ -66,27 +65,21 @@ dbRef.on('value', function(snapshot) {
 			position: allImages[i].position, //coordinates inside timLatLng
 			map: map,
 			icon: marker, // sets marker to a new image stored inside bigSmile
-			title: 'New Marker',
+			title: 'hi',
 			attr: i
 		});
-		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
-			var infoWindow = new google.maps.InfoWindow({
-				content: " "
-			});
-			imgIndex = this.attr;
-			infoWindow.setContent('<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br>' +
-                '<div onclick="myFunction()">Click me</div>');
-			infoWindow.open(map, this);
 
+		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
+			var infoWindowOptions = { //contents of info window
+				content:'<img border="0" id="img-size" src="'+allImages[this.attr].source+'">'
+			};
+			var infoWindow1 = new google.maps.InfoWindow(infoWindowOptions);
+			infoWindow1.open(map, this);
 		});
 	};
 }, function(error) {
 	console.error(error);
 });
-
-function myFunction(){ //function for buttons inside infowindows
-	console.log(imgIndex);
-}
 
 
 //SUBMIT BUTTON FOR IMAGES
@@ -96,9 +89,7 @@ $('#imgUploaderBtn').on('click', '#imageBtn', function () {
 			username: username,
 			source: src,
 			markerSrc: mapIcon,
-			position: {lat: latitude, lng: longitude},
-			time: ' ',
-			comment: ' '
+			position: {lat: latitude, lng: longitude}
 		};
 		allImages.push(imageObj);
 		dbRef.child('images').set(allImages);
@@ -117,8 +108,8 @@ $('#imgUploaderBtn').on('click', '#imageBtn', function () {
 $(document).ready(function() {
  	$("#owl-demo").owlCarousel({
 		autoPlay: false, //Set AutoPlay to x000 seconds
-		items : 5, //Number of items visable at a time
-		itemsDesktop : [1199,5],
-		itemsDesktopSmall : [979,5]
+		items : 4, //Number of items visable at a time
+		itemsDesktop : [1199,3],
+		itemsDesktopSmall : [979,3]
 	});
 });

@@ -5,7 +5,7 @@ function addButtons() {
 	$('#imgUploaderBtn').append('<button type="button" class="btn btn-default" id="imageBtn">Images</button>');
 	$('#imgUploader').append('<input type="file" id="imgLoader">');
 	imgSelector();
-};
+}
 
 
 function signIn () {
@@ -28,7 +28,7 @@ function signIn () {
 	};
 	if (usernameCheck === false) { // if there where no users already in that database with that name
 		$('#logInMessageDiv').text('Invalid Username or Password.');
-		};
+		}
 };
 
 $('#logInBtn').on('click', function(){
