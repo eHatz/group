@@ -7,7 +7,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 
 $('#get_location').on('click',function () {
     navigator.geolocation.getCurrentPosition(c);
-    return false;
+
 });
 var c = function(pos) {
     var lat = pos.coords.latitude,
