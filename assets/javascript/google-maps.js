@@ -13,8 +13,7 @@ var c = function(pos) {
     var lat = pos.coords.latitude,
         long = pos.coords.longitude,
         coords = lat + ',' + long;
-    console.log(lat);
-    console.log(long);
+        map.center = {lat: lat, lng: long}
 };
 
 var mapIcon = "assets/images/waldo.png";
