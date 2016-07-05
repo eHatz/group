@@ -2,7 +2,7 @@ var latitude;
 var longitude;
 var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 10,
-	center: {lat: 40.4259120, lng: -74.3922090}//centers map on these coordinates
+	center: {lat: 39.876019419621166, lng: -74.3922090}//centers map on these coordinates
 });
 
 $('#get_location').on('click',function () {
@@ -13,7 +13,6 @@ var c = function(pos) {
     var lat = pos.coords.latitude,
         long = pos.coords.longitude,
         coords = lat + ',' + long;
-        map.center = {lat: lat, lng: long}
 };
 
 var mapIcon = "assets/images/waldo.png";
@@ -38,10 +37,12 @@ google.maps.event.addListener(autocomplete, 'place_changed', function() {
 	var place = autocomplete.getPlace(); //give the variable place the value that was autocompleted in the search bar
 	if (place.geometry.viewport) { //probably recenter map on searched location
 		map.fitBounds(place.geometry.viewport);
+		console.log(place.geometry.location);
 		map.setZoom(20);
 
 	} else {
 		map.setCenter(place.geometry.location);
+		console.log(place.geometry.location);
 		map.setZoom(20);
 	}
 

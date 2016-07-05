@@ -2,6 +2,7 @@ var src = '';
 var allUsers;
 var allImages;
 var imgIndex;
+var	imgUser;
 
 var username;
 var password;
@@ -67,16 +68,21 @@ dbRef.on('value', function(snapshot) {
 			map: map,
 			icon: marker, // sets marker to a new image stored inside bigSmile
 			title: 'New Marker',
-			attr: i
+			attr: i,
+			username: allImages[i].username
 		});
 		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
 			var infoWindow = new google.maps.InfoWindow({
 				content: " "
 			});
 			imgIndex = this.attr;
+			imgUser = this.username;
+			console.log
+			var checkUser = checkUsername()
+
 			infoWindow.setContent('<p>'+allImages[this.attr].username+'</p>' +'<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br>' + 
 				'<p>'+allImages[this.attr].comment+'</p><br>' +
-                '<button onclick="myFunction()">Click me</button>');
+                '<button onclick="upVote()">Up Vote</button>' + '<button onclick="downVote()">Down Vote</button>' + checkUser);
 			infoWindow.open(map, this);
 
 		});
@@ -89,7 +95,20 @@ function myFunction(){ //function for buttons inside infowindows
 	allImages.splice(imgIndex,1);
 	dbRef.child('images').set(allImages);
 };
+function upVote() {
+	console.log(imgIndex);
+};
+function downVote() {
+	
+};
+function checkUsername(){
 
+	if (imgUser === username) {
+		return '<button onclick="myFunction()">Remove</button>';
+	} else {
+		return ' ';
+	};
+};
 
 //SUBMIT BUTTON FOR IMAGES
 $('#imgUploaderBtn').on('click', '#imageBtn', function () {
@@ -100,7 +119,8 @@ $('#imgUploaderBtn').on('click', '#imageBtn', function () {
 			markerSrc: mapIcon,
 			position: {lat: latitude, lng: longitude},
 			time: ' ',
-			comment: $('#message').val()
+			comment: $('#message').val(),
+			votes: {up: 0, down:0}
 			};
 		allImages.push(imageObj);
 		dbRef.child('images').set(allImages);
