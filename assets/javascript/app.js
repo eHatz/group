@@ -71,7 +71,7 @@ dbRef.on('value', function(snapshot) {
 
 		google.maps.event.addListener(newMarker,'click',function(e){ //when a specific marker is clicked the info window will appear
 			var infoWindowOptions = { //contents of info window
-				content:'<img border="0" id="img-size" src="'+allImages[this.attr].source+'">'
+				content:'<img border="0" id="img-size" src="'+allImages[this.attr].source+'"><br><div id="relevant">Still Relevant</div><div id="relevant">Nah</div>'
 			};
 			var infoWindow1 = new google.maps.InfoWindow(infoWindowOptions);
 			infoWindow1.open(map, this);
@@ -108,7 +108,7 @@ $('#imgUploaderBtn').on('click', '#imageBtn', function () {
 $(document).ready(function() {
  	$("#owl-demo").owlCarousel({
 		autoPlay: false, //Set AutoPlay to x000 seconds
-		items : 4, //Number of items visable at a time
+		items : 6, //Number of items visable at a time
 		itemsDesktop : [1199,3],
 		itemsDesktopSmall : [979,3]
 	});

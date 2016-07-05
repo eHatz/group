@@ -20,7 +20,6 @@ h1 {
 	text-align: center;
 }
 
-
 #owl-demo .item{
   margin: 3px;
 }
@@ -28,4 +27,14 @@ h1 {
   display: block;
   width: 100%;
   height: auto;
+}
+
+#relevant{
+	color: red;
+	float: left;
+	width: 50%;
+	text-align: center;
+	font-weight: bold;
+	padding-top: 5px;
+
 }
