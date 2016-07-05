@@ -1,15 +1,13 @@
-var username;
-var password;
-var src = '';
-var allUsers;
-var allImages;
+// var src = '';
+// var allUsers;
+// var allImages;
 
-var config = {
-	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
-	authDomain: "group-e135d.firebaseapp.com",
-	databaseURL: "https://group-e135d.firebaseio.com",
-	storageBucket: "",
-};
+// var config = {
+// 	apiKey: "AIzaSyDI0B16EYsHtn3zLlbKRzk5nPZvEN5_uSA",
+// 	authDomain: "group-e135d.firebaseapp.com",
+// 	databaseURL: "https://group-e135d.firebaseio.com",
+// 	storageBucket: "",
+// };
 
 firebase.initializeApp(config);
 var dbRef = firebase.database().ref();
@@ -28,57 +26,7 @@ document.getElementById('imgLoader').onchange = function handleImage(e) {// give
 	reader.readAsDataURL(e.target.files[0]);
 };
 
-// USER SIGNUP FORM
-// function signup () {
 
-	$('#formSubmit').on('click', function() { // form for username and password
-		username = $('#usernameField').val(); // value inside username field
-		password = $('#passwordField').val(); // value inside password field
-
-		var dbUser = {
-			username: username,
-			password: password
-		};
-		var usernameCheck = false;
-		for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
-			if (allUsers[i].username === username) { //if the username already exists change that value to true
-				usernameCheck = true;
-			}
-		}
-		if (usernameCheck === false) { // if there where no users already in that database with that name
-			dbRef.child('currentUser').set(dbUser); //changes value of current user on firebase to the object dbUser
-			allUsers.push(dbUser); // pushes the user object into the array
-			dbRef.child('users').set(allUsers); // sends the value of the new array to firebase
-			console.log('false');
-		} else {
-			$('#messageDiv').text('Username already exists.'); // if the user does exist show this message
-			console.log('true');
-		}
-		return false;
-	});
-// };
-
-// function signIn () {
-	$('#formSubmit').on('click', function() { 
-		username = $('#usernameField').val(); // value inside username field
-		password = $('#passwordField').val(); // value inside password field
-		var dbUser = {
-			username: username,
-			password: password
-		};
-		var usernameCheck = false;
-		for (var i = 0; i < allUsers.length; i++) { //runs through array of all users
-			if (allUsers[i].username === username && allUsers[i].password === password) { //if the username already exists change that value to true
-				usernameCheck = true;
-			};
-			if (usernameCheck === false) { // if there where no users already in that database with that name
-				$('#messageDiv').text('Invalid Username or Password.')
-			} else {
-				
-			};
-		}
-	});
-// };
 dbRef.on('value', function(snapshot) {
 	allUsers = snapshot.val().users;
 	allImages = snapshot.val().images;
@@ -113,9 +61,6 @@ dbRef.on('value', function(snapshot) {
 			infoWindow1.open(map, this);
 		});
 	};
-
-
-
 }, function(error) {
 	console.error(error);
 });
