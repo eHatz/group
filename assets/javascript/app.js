@@ -29,7 +29,7 @@ document.getElementById('imgLoader').onchange = function handleImage(e) {// give
 };
 
 // USER SIGNUP FORM
-function signup () {
+// function signup () {
 
 	$('#formSubmit').on('click', function() { // form for username and password
 		username = $('#usernameField').val(); // value inside username field
@@ -49,12 +49,14 @@ function signup () {
 			dbRef.child('currentUser').set(dbUser); //changes value of current user on firebase to the object dbUser
 			allUsers.push(dbUser); // pushes the user object into the array
 			dbRef.child('users').set(allUsers); // sends the value of the new array to firebase
+			console.log('false');
 		} else {
-			alert('Username already exists.'); // if the user does exist show this message
+			$('#messageDiv').text('Username already exists.'); // if the user does exist show this message
+			console.log('true');
 		}
 		return false;
 	});
-};
+// };
 
 function signIn () {
 	username = $('#usernameField').val(); // value inside username field
