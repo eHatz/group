@@ -1,0 +1,80 @@
+.jumbotron{
+	background-image: url(https://media.giphy.com/media/Zl4qgmnvFPBeM/giphy.gif);
+	color: #ff9900;
+	font-family: "Amatic SC", cursive;
+	font-size: 600px;
+	height: 300px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+body{
+	background-color: black;
+}
+
+.form-group{
+	float: right;
+}
+
+.btn-warning{
+	float: right;
+}
+
+.signIn{
+	color: #ff9900;
+	font-family: "Amatic SC", cursive;
+	font-size: 70px;
+}
+.checkbox{
+	color:#ff9900;
+	font-family: "Amatic SC", cursive;
+}
+ #navBar{
+ 	background-color: black;
+ 	font-family: "Amatic SC", cursive;
+ 	font-size: 20px;
+ 	color: #ff9900;
+ }
+#navWrapper{
+	width: 960px;
+	margin: 0 auto;
+	text-align: left;
+}
+#navBar ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+#navBar ul li{
+	display: inline-block;
+}
+
+#navBar ul li:hover{
+	background-color: black;
+}
+
+#navBar ul li a, visited{
+	color: #ff9933;
+	display: block;
+	padding: 15px;
+}
+#navBar ul li:hover ul{
+	display: block;
+}
+#navBar ul ul{
+	display: none;
+}
+#name{
+	color: #ff9933;
+	font-family: "Amatic SC", cursive;
+}
+
+
+
+
+
+
+
+
